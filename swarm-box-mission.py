@@ -8,8 +8,8 @@ import threading
 import time
 
 # IP and port of Tello
-tello1_address = ('192.168.0.101', 8889)
-tello2_address = ('192.168.0.102', 8889)
+tello1_address = ('192.168.0.100', 8889)
+tello2_address = ('192.168.0.101', 8889)
 
 # IP and port of local computer
 local1_address = ('', 9010)
@@ -42,8 +42,10 @@ def receive():
   while True:
     # Try to receive the message otherwise print the exception
     try:
-      response, ip_address = sock1.recvfrom(128)
-      print("Received message: " + response.decode(encoding='utf-8'))
+      response1, ip_address = sock1.recvfrom(128)
+      response2, ip_address = sock2.recvfrom(128)
+      print("Received message: from Tello EDU #1: " + response1.decode(encoding='utf-8'))
+      print("Received message: from Tello EDU #2: " + response2.decode(encoding='utf-8'))
     except Exception as e:
       # If there's an error close the socket and break out of the loop
       sock1.close()
